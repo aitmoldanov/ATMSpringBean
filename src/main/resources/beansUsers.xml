@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="abzal" class="com.example.demospring.User">
+        <property name="userID" value="87"/>
+        <property name="userPin" value="1432"/>
+        <property name="balance" value="5000"/>
+    </bean>
+
+    <bean id="aidos" class="com.example.demospring.User">
+        <property name="userID" value="78"/>
+        <property name="userPin" value="1234"/>
+        <property name="balance" value="21250"/>
+    </bean>
+
+    <bean id="users" class="com.example.demospring.BankATM">
+        <property name="users">
+            <map>
+                <entry key-ref="abzal" value-ref="abzal"/>
+                <entry key-ref="aidos" value-ref="aidos"/>
+
+            </map>
+        </property>
+    </bean>
+</beans>
