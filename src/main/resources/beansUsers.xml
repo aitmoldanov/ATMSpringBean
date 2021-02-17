@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="abzal" class="com.example.demospring.User">
         <property name="userID" value="87"/>
@@ -20,8 +21,14 @@
             <map>
                 <entry key-ref="abzal" value-ref="abzal"/>
                 <entry key-ref="aidos" value-ref="aidos"/>
-
             </map>
         </property>
+    </bean>
+    <context:annotation-config></context:annotation-config>
+
+    <bean id="accountService" class="com.example.demospring.UserService">
+        <property name="dbLink" value="jdbc:postgresql://localhost:5432/atm"/>
+        <property name="dbPassword" value="atm"/>
+        <property name="dbUsername" value="admin"/>
     </bean>
 </beans>

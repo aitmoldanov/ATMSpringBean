@@ -1,11 +1,7 @@
 package com.example.demospring;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class BankATM {
     private Map<User,User> users = new HashMap<>();
@@ -24,36 +20,46 @@ public class BankATM {
         this.users = users;
     }
 
-    boolean check(int userID, int userPin) {
+    User check(int userID, int userPin) {
         for (User user : users.keySet()){
             if (user.getUserID() == userID && user.getUserPin() == userPin){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public boolean deposit(int amount, int userID) {
+        for (User user: users.keySet()){
+            if (user.getUserID() == userID) {
+                int remain = user.getBalance() + amount;
+                user.setBalance(remain);
+                System.out.println("Success!");
                 return true;
             }
         }
         return false;
     }
-
-    public void deposit(int amount, int userID) {
-        for (User user: users.keySet()){
-            if (user.getUserID() == userID){
-                int remain = user.getBalance() + amount;
-                user.setBalance(remain);
-                System.out.println("Success!");
-            }else if(amount < 0) {
-                System.out.println("Wrong input data!");
-            }
-        }
-    }
-    public void withdrawal(int amount, int userID) {
+    public boolean withdrawal(int amount, int userID) {
         for (User user: users.keySet()){
             if (user.getUserID() == userID){
                 int remain = user.getBalance() - amount;
                 user.setBalance(remain);
                 System.out.println("Success!");
-            }else if (amount < 0 && amount > user.getBalance()){
-                System.out.println("Error!");
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public boolean changePin(int newPin, int userID, int userPin) {
+        for (User user: users.keySet()){
+            if (user.getUserID() == userID && user.getUserPin() == userPin){
+                user.setUserPin(newPin);
+                return true;
             }
         }
+        return false;
     }
 
 
